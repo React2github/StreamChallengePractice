@@ -1,8 +1,13 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.example.io.StatisticsOutputService;
 import org.example.io.TextInputService;
+import org.example.io.impl.JsonFileStatisticsOutputService;
 import org.example.statistics.TextStatisticsService;
+import org.example.statistics.model.TextStatistics;
 
 public class Processor {
     private TextInputService textInputService;
@@ -20,7 +25,12 @@ public class Processor {
      * Get the statistics
      * Output the statistics
      */
+    // 
+
     public void process() {
-        // TODO
+        String content = textInputService.getText();
+        TextStatistics textStatistics = textStatisticsService.getStatistics(content);
+        JsonFileStatisticsOutputService jsonFileStatisticsOutputService = new JsonFileStatisticsOutputService();
+        jsonFileStatisticsOutputService.save(textStatistics);
     }
 }
